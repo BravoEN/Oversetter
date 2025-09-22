@@ -28,7 +28,7 @@
                 <RadioButton text="Alien" toggleGroup="$fraSprak" fx:id="fraAlien"/>
             </VBox>
 
-            <TextArea fx:id="fraTekst"></TextArea>
+            <TextArea fx:id="fraTekst"/>
         </VBox>
         <VBox>
             <padding>
@@ -43,7 +43,7 @@
                 <RadioButton text="Alien" toggleGroup="$tilSprak" fx:id="tilAlien"/>
             </VBox>
 
-            <TextArea fx:id="tilTekst"></TextArea>
+            <TextArea fx:id="tilTekst" editable="false"/>
         </VBox>
     </HBox>
     <HBox>
