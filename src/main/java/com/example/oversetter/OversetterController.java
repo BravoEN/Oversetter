@@ -1,5 +1,6 @@
 package com.example.oversetter;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
@@ -28,32 +29,38 @@ public class OversetterController {
         RadioButton tilsprakSelectedToggle = (RadioButton) tilSprak.getSelectedToggle();
         String[] ord = fraTekst.getText().split(" ");
         boolean funnet = false;
-        if (frasprakSelectedToggle.getText().equals("Norsk") && tilsprakSelectedToggle.getText().equals("Alien")) {
-            for (int i = 0; i < ord.length; i++) {
-                for (Ord obj : objectList ) {
-                    if (ord[i].equals(obj.norskOrd)) {
-                        funnet = true;
-                        tilTekst.appendText(obj.alienOrd + " ");
+        try {
+            if (frasprakSelectedToggle.getText().equals("Norsk") && tilsprakSelectedToggle.getText().equals("Alien")) {
+                for (int i = 0; i < ord.length; i++) {
+                    for (Ord obj : objectList ) {
+                        if (ord[i].equals(obj.norskOrd)) {
+                            funnet = true;
+                            tilTekst.appendText(obj.alienOrd + " ");
+                        }
                     }
-                }
-                if (funnet == false) {
-                    tilTekst.appendText("??? ");
-                }
-                funnet = false;
-            }
-        } else if (frasprakSelectedToggle.getText().equals("Alien") && tilsprakSelectedToggle.getText().equals("Norsk")) {
-            for (int i = 0; i < ord.length; i++) {
-                for (Ord obj : objectList ) {
-                    if (ord[i].equals(obj.alienOrd)) {
-                        funnet = true;
-                        tilTekst.appendText(obj.norskOrd + " ");
+                    if (funnet == false) {
+                        tilTekst.appendText("??? ");
                     }
+                    funnet = false;
                 }
-                if (funnet == false) {
-                    tilTekst.appendText("??? ");
+            } else if (frasprakSelectedToggle.getText().equals("Alien") && tilsprakSelectedToggle.getText().equals("Norsk")) {
+                for (int i = 0; i < ord.length; i++) {
+                    for (Ord obj : objectList ) {
+                        if (ord[i].equals(obj.alienOrd)) {
+                            funnet = true;
+                            tilTekst.appendText(obj.norskOrd + " ");
+                        }
+                    }
+                    if (funnet == false) {
+                        tilTekst.appendText("??? ");
+                    }
+                    funnet = false;
                 }
-                funnet = false;
+            } else {
+                tilTekst.setText("Ugyldig valg av språk");
             }
+        } catch (Exception e) {
+            tilTekst.setText("Ugyldig valg av språk");
         }
     }
 
@@ -65,7 +72,7 @@ public class OversetterController {
 
     @FXML
     protected void avsluttKnapp() {
-        javafx.application.Platform.exit();
+        Platform.exit();
     }
 }
 
